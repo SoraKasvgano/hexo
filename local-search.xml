@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>Gallery Post</title>
+    <link href="/2013/12/25/gallery-post/"/>
+    <url>/2013/12/25/gallery-post/</url>
+    
+    <content type="html"><![CDATA[<p>This post contains 4 photos:</p><ul><li>Widescreen wallpaper</li><li>Portrait photo</li><li>Dual widescreen wallpaper</li><li>Small photo</li></ul><p>All photos should be displayed properly.</p><p><em>From <a href="http://wallbase.cc/">Wallbase.cc</a></em></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Categories</title>
+    <link href="/2013/12/24/categories/"/>
+    <url>/2013/12/24/categories/</url>
+    
+    <content type="html"><![CDATA[<p>This post contains 3 categories. Make sure your theme can display all of the categories.</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Foo</category>
+      
+      <category>Bar</category>
+      
+      <category>Baz</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Tags</title>
+    <link href="/2013/12/24/tags/"/>
+    <url>/2013/12/24/tags/</url>
+    
+    <content type="html"><![CDATA[<p>This post contains 3 tags. Make sure your theme can display all of the tags.</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Foo</tag>
+      
+      <tag>Bar</tag>
+      
+      <tag>Baz</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
