@@ -1,0 +1,740 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Sora">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="树莓派优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树莓派安装后常用设置及优化">
+<meta property="og:url" content="https://hexo.s0r4.com/2023/06/06/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85%E5%90%8E%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE%E5%8F%8A%E4%BC%98%E5%8C%96/index.html">
+<meta property="og:site_name" content="缘之空">
+<meta property="og:description" content="树莓派优化">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-06-06T16:17:08.000Z">
+<meta property="article:modified_time" content="2023-06-06T08:33:24.462Z">
+<meta property="article:author" content="Sora">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Armbian">
+<meta property="article:tag" content="Raspbian">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>树莓派安装后常用设置及优化 - 缘之空</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"hexo.s0r4.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>缘之空</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://samoyed.lofer.com">
+                <i class="iconfont icon-images"></i>
+                <span>Gallery</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="树莓派安装后常用设置及优化"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-06 16:17" pubdate>
+          June 6, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.8k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          24 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">树莓派安装后常用设置及优化</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="树莓派4B-64位（arm64）系统配置系统源"><a href="#树莓派4B-64位（arm64）系统配置系统源" class="headerlink" title="树莓派4B 64位（arm64）系统配置系统源"></a>树莓派4B 64位（arm64）系统配置系统源</h2><p>根据自己raspbian系统是64位还是32位自行选择一、二步骤</p>
+<h3 id="一、64位系统配置（arm64版本）"><a href="#一、64位系统配置（arm64版本）" class="headerlink" title="一、64位系统配置（arm64版本）"></a>一、64位系统配置（arm64版本）</h3><p>64位镜像可以直接使用debian的系统源，首先需要编辑&#x2F;etc&#x2F;apt&#x2F;sources.list，使用#号注释原内容，然后在末尾添加Debian的系统源：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释</span><br>deb https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/debian/</span> buster main contrib non-free<br><span class="hljs-comment"># deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ buster main contrib non-free</span><br>deb https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/debian/</span> buster-updates main contrib non-free<br><span class="hljs-comment"># deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ buster-updates main contrib non-free</span><br>deb https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/debian/</span> buster-backports main contrib non-free<br><span class="hljs-comment"># deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ buster-backports main contrib non-free</span><br>deb https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/debian-security buster/u</span>pdates main contrib non-free<br><span class="hljs-comment"># deb-src https://mirrors.tuna.tsinghua.edu.cn/debian-security buster/updates main contrib non-free</span><br></code></pre></td></tr></table></figure>
+<p>接着需要配置树莓派官方的软件源，编辑&#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;raspi.list，同样的，注释原内容，在末尾添加如下内容：</p>
+<p><code>deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui</code></p>
+<h3 id="二、32位系统配置（armhf版本）"><a href="#二、32位系统配置（armhf版本）" class="headerlink" title="二、32位系统配置（armhf版本）"></a>二、32位系统配置（armhf版本）</h3><p>两者配置方法一致，都是修改上述两个文件（64位系统也可以下述系统源），具体如下：</p>
+<p>编辑 &#x2F;etc&#x2F;apt&#x2F;sources.list 文件，注释原文件内容，用以下内容取代：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">deb http:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/raspbian/</span>raspbian/ buster main non-free contrib rpi<br>deb-src http:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/raspbian/</span>raspbian/ buster main non-free contrib rpi<br></code></pre></td></tr></table></figure>
+<p>编辑 &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;raspi.list 文件，注释原文件内容，用以下内容取代：</p>
+<p><code>deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui</code></p>
+<p>系统设置完一或二步骤后执行更新</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">sudo apt update</span><br><span class="hljs-attribute">sudo apt upgrade -y</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="三、延长树莓派TF卡SD卡寿命"><a href="#三、延长树莓派TF卡SD卡寿命" class="headerlink" title="三、延长树莓派TF卡SD卡寿命"></a>三、延长树莓派TF卡SD卡寿命</h2><p>在&#x2F;etc&#x2F;fstab中写入</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">tmpfs</span> /tmp tmpfs defaults,noatime,nosuid,size=<span class="hljs-number">100</span>m <span class="hljs-number">0</span> <span class="hljs-number">0</span><br><span class="hljs-attribute">tmpfs</span> /var/tmp tmpfs defaults,noatime,nosuid,size=<span class="hljs-number">30</span>m <span class="hljs-number">0</span> <span class="hljs-number">0</span><br><span class="hljs-attribute">tmpfs</span> /var/log tmpfs defaults,noatime,nosuid,mode=<span class="hljs-number">0755</span>,size=<span class="hljs-number">100</span>m <span class="hljs-number">0</span> <span class="hljs-number">0</span><br><span class="hljs-attribute">tmpfs</span> /var/run tmpfs defaults,noatime,nosuid,mode=<span class="hljs-number">0755</span>,size=<span class="hljs-number">2</span>m <span class="hljs-number">0</span> <span class="hljs-number">0</span><br><span class="hljs-attribute">tmpfs</span> /var/spool/mqueue tmpfs defaults,noatime,nosuid,mode=<span class="hljs-number">0700</span>,gid=<span class="hljs-number">12</span>,size=<span class="hljs-number">30</span>m <span class="hljs-number">0</span> <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+<p>使用挂载内存作为临时目录存放log等内容</p>
+<h2 id="四、关闭树莓派dphys-swapfile"><a href="#四、关闭树莓派dphys-swapfile" class="headerlink" title="四、关闭树莓派dphys-swapfile"></a>四、关闭树莓派dphys-swapfile</h2><p>首先执行<br><code>dphys-swapfile stop/uninstall</code><br>然后编辑etc&#x2F;dphys-swapfile 设置为0 重启即可</p>
+<h2 id="五、设置树莓派zram压缩内存"><a href="#五、设置树莓派zram压缩内存" class="headerlink" title="五、设置树莓派zram压缩内存"></a>五、设置树莓派zram压缩内存</h2><p>该内容对于Rpi4 8G版本可能失效，因为linux kernel bug导致，4G及一下版本没有问题<br>clone该项目<a target="_blank" rel="noopener" href="https://github.com/SeryogaBrigada/rpi-zram">https://github.com/SeryogaBrigada/rpi-zram</a><br>并给予777权限，运行 .&#x2F;systemd_install.sh 即可。<br>  不过以服务运行可能会产生log垃圾，所以这里推荐<a target="_blank" rel="noopener" href="https://github.com/ecdye/zram-config">https://github.com/ecdye/zram-config</a> 这个项目。<br>开启方法</p>
+<figure class="highlight plaintext"><figcaption><span>apt-get install git</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sudo">git clone --recurse-submodules https://github.com/ecdye/zram-config<br>cd zram-config<br>sudo ./install.bash<br></code></pre></td></tr></table></figure>
+<p>停止方法<br><code>sudo zram-config &quot;stop&quot;</code><br>升级方法</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">cd <span class="hljs-regexp">/path/</span>to<span class="hljs-regexp">/zram-config/</span><br>sudo ./update.bash<br></code></pre></td></tr></table></figure>
+<p>卸载方法<br><code>sudo /usr/local/share/zram-config/uninstall.bash</code><br>查看zram是否在运行<br><code>zramctl</code></p>
+<h2 id="六、开启bbr"><a href="#六、开启bbr" class="headerlink" title="六、开启bbr"></a>六、开启bbr</h2><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs arcade">echo net.core.default_qdisc=fq &gt;&gt; <span class="hljs-regexp">/etc/</span>sysctl.conf<br>echo net.ipv4.tcp_congestion_control=bbr &gt;&gt; <span class="hljs-regexp">/etc/</span>sysctl.conf<br>sysctl -p<br></code></pre></td></tr></table></figure>
+<p>检查是否成功<br><code>sysctl net.ipv4.tcp_available_congestion_control</code><br>会显示</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">sysctl net<span class="hljs-selector-class">.ipv4</span><span class="hljs-selector-class">.tcp_available_congestion_control</span><br>net<span class="hljs-selector-class">.ipv4</span><span class="hljs-selector-class">.tcp_available_congestion_control</span> = bbr cubic reno<br></code></pre></td></tr></table></figure>
+<p>或执行<code>lsmod | grep bbr</code><br>出现<code>tcp_bbr                20480  26</code></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8A%80%E6%9C%AF/" class="category-chain-item">技术</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%8A%80%E6%9C%AF/">#技术</a>
+      
+        <a href="/tags/Linux/">#Linux</a>
+      
+        <a href="/tags/Armbian/">#Armbian</a>
+      
+        <a href="/tags/Raspbian/">#Raspbian</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>树莓派安装后常用设置及优化</div>
+      <div>https://hexo.s0r4.com/2023/06/06/树莓派安装后常用设置及优化/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Sora</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>June 6, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/06/06/ARM%E8%AE%BE%E5%A4%87docker%E2%80%9D%E4%B8%80%E9%94%AE%E2%80%9C%E6%90%ADts3%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="ARM设备docker”一键“搭ts3服务器">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ARM设备docker”一键“搭ts3服务器</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/06/06/armbian%E7%BD%91%E5%8D%A1%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81%E5%9C%B0%E5%9D%80%E7%9A%84%E6%96%B9%E6%B3%95/" title="armbian网卡设置静态地址的方法">
+                        <span class="hidden-mobile">armbian网卡设置静态地址的方法</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'SoraKasvgano/hexo');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,824 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Sora">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="白嫖">
+<meta property="og:type" content="article">
+<meta property="og:title" content="青龙拉取常用京东脚本库">
+<meta property="og:url" content="https://hexo.s0r4.com/2023/06/06/%E9%9D%92%E9%BE%99%E6%8B%89%E5%8F%96%E5%B8%B8%E7%94%A8%E4%BA%AC%E4%B8%9C%E8%84%9A%E6%9C%AC%E5%BA%93/index.html">
+<meta property="og:site_name" content="缘之空">
+<meta property="og:description" content="白嫖">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-06-06T15:50:35.000Z">
+<meta property="article:modified_time" content="2023-06-06T08:33:24.462Z">
+<meta property="article:author" content="Sora">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>青龙拉取常用京东脚本库 - 缘之空</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"hexo.s0r4.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>缘之空</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://samoyed.lofer.com">
+                <i class="iconfont icon-images"></i>
+                <span>Gallery</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="青龙拉取常用京东脚本库"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-06 15:50" pubdate>
+          June 6, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          102 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">青龙拉取常用京东脚本库</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="青龙拉取常用京东脚本库"><a href="#青龙拉取常用京东脚本库" class="headerlink" title="青龙拉取常用京东脚本库"></a>青龙拉取常用京东脚本库</h1><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ul>
+<li>更新一个整库脚本<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">ql repo <span class="hljs-tag">&lt;<span class="hljs-name">repourl</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">path</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">blacklist</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">dependence</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">branch</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+<li>更新单个脚本文件<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">ql raw <span class="hljs-tag">&lt;<span class="hljs-name">fileurl</span>&gt;</span><br></code></pre></td></tr></table></figure>
+下面是示例</li>
+</ul>
+<h2 id="推荐"><a href="#推荐" class="headerlink" title="推荐"></a>推荐</h2><ol>
+<li><code>FAKER3</code><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>t.metauniverse-cn.com<span class="hljs-regexp">/https:/</span><span class="hljs-regexp">/github.com/</span>shufflewzc/faker3.git <span class="hljs-string">&quot;jd_|jx_|gua_|jddj_|jdCookie&quot;</span> <span class="hljs-string">&quot;activity|backUp&quot;</span> <span class="hljs-string">&quot;^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql|JDSignValidator|magic|depend|h5sts&quot;</span> <span class="hljs-string">&quot;main&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><code>KingRan</code><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/KingRan/</span>KR.git <span class="hljs-string">&quot;jd_|jx_|jdCookie&quot;</span> <span class="hljs-string">&quot;activity|backUp&quot;</span> <span class="hljs-string">&quot;^jd[^_]|USER|utils|function|sign|sendNotify|ql|JDJR&quot;</span><br></code></pre></td></tr></table></figure>
+&#96;&#96;</li>
+</ol>
+<h2 id="整库"><a href="#整库" class="headerlink" title="整库"></a>整库</h2><ul>
+<li><p><code>Unknown 备份托管等</code></p>
+<ol>
+<li><code>JDHelloWorld</code><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/JDHelloWorld/</span>jd_scripts.git <span class="hljs-string">&quot;jd_|jx_|getJDCookie&quot;</span> <span class="hljs-string">&quot;activity|backUp|Coupon|enen|update|test&quot;</span> <span class="hljs-string">&quot;^jd[^_]|USER|^TS|utils|notify|env|package|ken.js&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><code>he1pu</code>（自动提交助力码-京喜工厂、种豆得豆、东东工厂、东东农场、健康社区、京喜财富岛、东东萌宠、闪购盲盒，随机从数据库中选取助力码互助）<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/he1pu/</span>JDHelp.git <span class="hljs-string">&quot;jd_|jx_|getJDCookie&quot;</span> <span class="hljs-string">&quot;Coupon|update&quot;</span> <span class="hljs-string">&quot;^jd[^_]|USER|^sign|^ZooFaker|utils&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><code>shufflewzc</code><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/shufflewzc/</span>faker2.git <span class="hljs-string">&quot;jd_|jx_|gua_|jddj_|getJDCookie&quot;</span> <span class="hljs-string">&quot;activity|backUp&quot;</span> <span class="hljs-string">&quot;^jd[^_]|USER|utils|^JS|^TS|^JDJRValidator_Pure|^ZooFaker|^sign&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><code>Aaron-lv</code><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/Aaron-lv/</span>sync.git <span class="hljs-string">&quot;jd_|jx_|getJDCookie&quot;</span> <span class="hljs-string">&quot;activity|backUp|Coupon&quot;</span> <span class="hljs-string">&quot;^jd[^_]|USER|utils&quot;</span> <span class="hljs-string">&quot;jd_scripts&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><code>panghu999</code>（无维护）<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/panghu999/</span>jd_scripts.git <span class="hljs-string">&quot;jd_|jx_|getJDCookie&quot;</span> <span class="hljs-string">&quot;activity|backUp|Coupon|jd_try|format_&quot;</span> <span class="hljs-string">&quot;^jd[^_]|USER&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><code>chinnkarahoi</code>（无维护）<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/chinnkarahoi/</span>jd_scripts.git <span class="hljs-string">&quot;jd_|jx_|getJDCookie&quot;</span> <span class="hljs-string">&quot;activity|backUp|Coupon&quot;</span> <span class="hljs-string">&quot;^jd[^_]|USER&quot;</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p><code>passerby-b</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/passerby-b/</span>JDDJ.git <span class="hljs-string">&quot;jddj_&quot;</span> <span class="hljs-string">&quot;scf_test_event|jddj_fruit_code.js|jddj_getck.js|jd_|jddj_cookie&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><p><code>curtinlv</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/curtinlv/</span>JD-Script.git <span class="hljs-string">&quot;jd_&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><p><code>smiek2221</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/smiek2221/</span>scripts.git <span class="hljs-string">&quot;jd_|gua_&quot;</span> <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">&quot;^MovementFaker|^JDJRValidator|^ZooFaker|^sign&quot;</span> <br></code></pre></td></tr></table></figure></li>
+<li><p><code>cdle</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/cdle/</span>xdd.git <span class="hljs-string">&quot;jd_&quot;</span> <span class="hljs-string">&quot;disposable|expired|jdc&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><p><code>ZCY01</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/ZCY01/</span>daily_scripts.git <span class="hljs-string">&quot;jd_&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><p><code>whyour/hundun</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/whyour/</span>hundun.git <span class="hljs-string">&quot;quanx&quot;</span> <span class="hljs-string">&quot;tokens|caiyun|didi|donate|fold|Env&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><p><code>moposmall</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/moposmall/</span>Script.git <span class="hljs-string">&quot;Me&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><p><code>Ariszy (Zhiyi-N)</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/Ariszy/</span>Private-Script.git <span class="hljs-string">&quot;JD&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><p><code>photonmang</code>（宠汪汪及兑换、点点券修复）</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/photonmang/</span>quantumultX.git <span class="hljs-string">&quot;JDscripts&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><p><code>jiulan</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/jiulan/</span>platypus.git <span class="hljs-string">&quot;jd_|jx_&quot;</span> <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">&quot;overdue&quot;</span> <span class="hljs-string">&quot;main&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><p><code>star261</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/star261/</span>jd.git <span class="hljs-string">&quot;jd_|star&quot;</span> <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">&quot;code&quot;</span> <span class="hljs-string">&quot;main&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><p><code>Wenmoux</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/Wenmoux/</span>scripts.git <span class="hljs-string">&quot;other|jd&quot;</span> <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">&quot;wen&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><p><code>Tsukasa007</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/Tsukasa007/my</span>_script.git <span class="hljs-string">&quot;jd_|jx_&quot;</span> <span class="hljs-string">&quot;jdCookie|USER_AGENTS|sendNotify|backup&quot;</span> <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">&quot;master&quot;</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="单脚本"><a href="#单脚本" class="headerlink" title="单脚本"></a>单脚本</h2><h3 id="名称之后标注﹢的单脚本，若上面已拉取仓库的可以不拉，否则会重复拉取。这里适用于只拉取部分脚本使用"><a href="#名称之后标注﹢的单脚本，若上面已拉取仓库的可以不拉，否则会重复拉取。这里适用于只拉取部分脚本使用" class="headerlink" title="名称之后标注﹢的单脚本，若上面已拉取仓库的可以不拉，否则会重复拉取。这里适用于只拉取部分脚本使用"></a>名称之后标注<code>﹢</code>的单脚本，若上面已拉取仓库的可以不拉，否则会重复拉取。这里适用于只拉取部分脚本使用</h3><blockquote>
+<p><code>curtinlv</code>﹢</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>入会</p>
+</blockquote>
+</blockquote>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql raw https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/curtinlv/</span>JD-Script<span class="hljs-regexp">/main/</span>OpenCard/jd_OpenCard.py<br></code></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<p>关注</p>
+</blockquote>
+</blockquote>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql raw https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/curtinlv/</span>JD-Script<span class="hljs-regexp">/main/g</span>etFollowGifts/jd_getFollowGift.py<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>chiupam</code></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>京喜工厂瓜分电力开团 ID </p>
+</blockquote>
+</blockquote>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql raw https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/chiupam/</span>JD_Diy<span class="hljs-regexp">/master/</span>pys/activeId.py<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>Aaron-lv</code>+</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>财富岛</p>
+</blockquote>
+</blockquote>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql raw https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/Aaron-lv/</span>sync<span class="hljs-regexp">/jd_scripts/</span>jd_cfd.js<br></code></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/Aaron-lv/</span>sync.git <span class="hljs-string">&quot;jd_cfd&quot;</span> <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">&quot;jd_scripts&quot;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>Wenmoux</code>+</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>口袋书店</p>
+</blockquote>
+</blockquote>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql raw https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/Wenmoux/</span>scripts<span class="hljs-regexp">/wen/</span>jd/chinnkarahoi_jd_bookshop.js<br></code></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/Wenmoux/</span>scripts.git <span class="hljs-string">&quot;chinnkarahoi_jd_bookshop&quot;</span> <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">&quot;wen&quot;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>NobyDa</code></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>京东多合一签到脚本</p>
+</blockquote>
+</blockquote>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql raw https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/NobyDa/</span>Script<span class="hljs-regexp">/master/</span>JD-DailyBonus/JD_DailyBonus.js<br></code></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/NobyDa/</span>Script.git <span class="hljs-string">&quot;JD-DailyBonus&quot;</span> <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">&quot;JD_DailyBonus&quot;</span> <span class="hljs-string">&quot;master&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="已删库存档"><a href="#已删库存档" class="headerlink" title="已删库存档"></a>已删库存档</h2><ul>
+<li><code>monk-coder</code><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/monk-dust/</span>dust.git <span class="hljs-string">&quot;i-chenzhe|normal|member|car&quot;</span> <span class="hljs-string">&quot;backup&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><code>hyzaw</code><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/hyzaw/</span>scripts.git <span class="hljs-string">&quot;ddo_&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><code>zooPanda</code><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/zooPanda/</span>zoo.git <span class="hljs-string">&quot;zoo&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><code>longzhuzhu</code><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/longzhuzhu/</span>nianyu.git <span class="hljs-string">&quot;qx&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li><code>panghu999/panghu</code><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/panghu999/</span>panghu.git <span class="hljs-string">&quot;jd_&quot;</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>Extra.sh</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">#!/usr/bin/env bash</span><br><span class="hljs-comment">## Mod: Build20210910V1</span><br><span class="hljs-comment">## 添加你需要重启自动执行的任意命令，比如 ql repo</span><br><span class="hljs-comment">## 安装node依赖使用 pnpm install -g xxx xxx（Build 20210728-002 及以上版本的 code.sh，可忽略）</span><br><span class="hljs-comment">## 安装python依赖使用 pip3 install xxx（Build 20210728-002 及以上版本的 code.sh，可忽略）</span><br><br><br><span class="hljs-comment">#------ 说明区 ------#</span><br><span class="hljs-comment">## 1. 拉取仓库</span><br><span class="hljs-comment">### （1）定时任务→添加定时→命令【ql extra】→定时规则【15 0-23/4 * * *】→运行</span><br><span class="hljs-comment">### （2）若运行过 1custom 一键脚本，点击运行即可</span><br><span class="hljs-comment">### （3）推荐配置：如下。自行在设置区填写编号</span><br><span class="hljs-comment">## 2. 安装依赖</span><br><span class="hljs-comment">### （1）默认不安装，因为 Build 20210728-002 及以上版本的 code.sh 自动检查修复依赖</span><br><span class="hljs-comment">### （2）若需要在此处使用，请在设置区设置</span><br><span class="hljs-comment">## 3. Ninja</span><br><span class="hljs-comment">### （1）默认启动并自动更新</span><br><span class="hljs-comment">### （2）⚠未修改容器映射的请勿运行，否则会出现青龙打不开或者设备死机等不良后果，映射参考 https://github.com/MoonBegonia/ninja#%E5%AE%B9%E5%99%A8%E5%86%85</span><br><br><br><span class="hljs-comment">#------ 设置区 ------#</span><br><span class="hljs-comment">## 1. 拉取仓库编号设置，默认 shufflewzc 仓库</span><br>CollectedRepo=(<span class="hljs-number">4</span>) <span class="hljs-comment">##示例：CollectedRepo=(2 4 6)</span><br>OtherRepo=() <span class="hljs-comment">##示例：OtherRepo=(1 3)</span><br><span class="hljs-comment">## 2. 是否安装依赖和安装依赖包的名称设置</span><br>dependencies=<span class="hljs-string">&quot;r&quot;</span> <span class="hljs-comment">##yes为全部安装，no为不安装，p为安装package，r为安装requirement</span><br>package_name=<span class="hljs-string">&quot;@types/node axios canvas crypto-js date-fns dotenv fs jsdom png-js require ts-md5 tslib typescript&quot;</span><br>requirement_name=<span class="hljs-string">&quot;cryptography~=3.2.1 json5 requests rsa&quot;</span><br><span class="hljs-comment">## 3. Ninja 是否需要启动和更新设置</span><br>Ninja=<span class="hljs-string">&quot;on&quot;</span> <span class="hljs-comment">##up为更新，on为启动，down为不运行</span><br><br><br><span class="hljs-comment">#------ 编号区 ------#</span><br>:&lt;&lt;\EOF<br>一、集成仓库（Collected Repositories)<br><span class="hljs-number">2</span>-JDHelloWorld<br><span class="hljs-number">3</span>-he1pu<br><span class="hljs-number">4</span>-shufflewzc<br><span class="hljs-number">6</span>-Aaron-lv<br><span class="hljs-number">7</span>-yuannian1112<br>二、其他仓库（Other Repositories）<br><span class="hljs-number">1</span>-passerby-b<br><span class="hljs-number">2</span>-curtinlv<br><span class="hljs-number">3</span>-smiek2221<br><span class="hljs-number">4</span>-cdle<br><span class="hljs-number">5</span>-ZCY01<br><span class="hljs-number">6</span>-whyour/hundun<br><span class="hljs-number">7</span>-moposmall<br><span class="hljs-number">8</span>-Ariszy (Zhiyi-N)<br><span class="hljs-number">9</span>-photonmang<br><span class="hljs-number">10</span>-jiulan<br><span class="hljs-number">12</span>-star261<br><span class="hljs-number">13</span>-Wenmoux<br><span class="hljs-number">14</span>-Tsukasa007<br><span class="hljs-number">15</span>-ccwav<br>EOF<br><br><br><span class="hljs-comment">#------ 代码区 ------#</span><br><span class="hljs-comment"># 🌱拉取仓库</span><br>CR2()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/JDHelloWorld/</span>jd_scripts.git <span class="hljs-string">&quot;jd_|jx_|getJDCookie&quot;</span> <span class="hljs-string">&quot;activity|backUp|Coupon|enen|update|test&quot;</span> <span class="hljs-string">&quot;^jd[^_]|USER|^TS|utils|notify|env|package|ken.js&quot;</span><br>&#125;<br>CR3()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/he1pu/</span>JDHelp.git <span class="hljs-string">&quot;jd_|jx_|getJDCookie&quot;</span> <span class="hljs-string">&quot;Coupon|update&quot;</span> <span class="hljs-string">&quot;^jd[^_]|USER|^sign|^ZooFaker|utils&quot;</span><br>&#125;<br>CR4()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/shufflewzc/</span>faker2.git <span class="hljs-string">&quot;jd_|jx_|gua_|jddj_|getJDCookie&quot;</span> <span class="hljs-string">&quot;activity|backUp|Coupon|update&quot;</span> <span class="hljs-string">&quot;^jd[^_]|USER|utils|function|^JS|^TS|^JDJRValidator_Pure|^ZooFaker|^sign|ql&quot;</span><br>&#125;<br>CR6()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/Aaron-lv/</span>sync.git <span class="hljs-string">&quot;jd_|jx_|getJDCookie&quot;</span> <span class="hljs-string">&quot;activity|backUp|Coupon&quot;</span> <span class="hljs-string">&quot;^jd[^_]|USER|utils&quot;</span> <span class="hljs-string">&quot;jd_scripts&quot;</span><br>&#125;<br>CR7()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/yuannian1112/</span>jd_scripts.git <span class="hljs-string">&quot;jd_|jx_|getJDCookie&quot;</span> <span class="hljs-string">&quot;activity|backUp&quot;</span> <span class="hljs-string">&quot;^jd[^_]|USER|utils&quot;</span><br>&#125;<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-variable">$&#123;CollectedRepo[@]&#125;</span>; <span class="hljs-keyword">do</span><br>    CR<span class="hljs-variable">$i</span><br>    sleep <span class="hljs-number">10</span><br>done<br><br>OR1()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/passerby-b/</span>JDDJ.git <span class="hljs-string">&quot;jddj_&quot;</span> <span class="hljs-string">&quot;scf_test_event|jddj_fruit_code.js|jddj_getck.js|jd_|jddj_cookie&quot;</span><br>&#125;<br>OR2()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/curtinlv/</span>JD-Script.git <span class="hljs-string">&quot;jd_&quot;</span><br>&#125;<br>OR3()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/smiek2221/</span>scripts.git <span class="hljs-string">&quot;jd_|gua_&quot;</span> <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">&quot;^MovementFaker|^JDJRValidator|^ZooFaker|^sign&quot;</span><br>&#125;<br>OR4()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/cdle/</span>xdd.git <span class="hljs-string">&quot;jd_&quot;</span> <span class="hljs-string">&quot;disposable|expired|jdc&quot;</span><br>&#125;<br>OR5()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/ZCY01/</span>daily_scripts.git <span class="hljs-string">&quot;jd_&quot;</span><br>&#125;<br>OR6()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/whyour/</span>hundun.git <span class="hljs-string">&quot;quanx&quot;</span> <span class="hljs-string">&quot;tokens|caiyun|didi|donate|fold|Env&quot;</span><br>&#125;<br>OR7()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/moposmall/</span>Script.git <span class="hljs-string">&quot;Me&quot;</span><br>&#125;<br>OR8()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/Ariszy/</span>Private-Script.git <span class="hljs-string">&quot;JD&quot;</span><br>&#125;<br>OR9()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/photonmang/</span>quantumultX.git <span class="hljs-string">&quot;JDscripts&quot;</span><br>&#125;<br>OR10()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/jiulan/</span>platypus.git <span class="hljs-string">&quot;jd_|jx_&quot;</span> <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">&quot;overdue&quot;</span> <span class="hljs-string">&quot;main&quot;</span><br>&#125;<br>OR11()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/panghu999/</span>panghu.git <span class="hljs-string">&quot;jd_&quot;</span><br>&#125;<br>OR12()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/star261/</span>jd.git <span class="hljs-string">&quot;jd_|star&quot;</span> <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">&quot;code&quot;</span> <span class="hljs-string">&quot;main&quot;</span><br>&#125;<br>OR13()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/Wenmoux/</span>scripts.git <span class="hljs-string">&quot;other|jd&quot;</span> <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">&quot;wen&quot;</span><br>&#125;<br>OR14()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/Tsukasa007/my</span>_script.git <span class="hljs-string">&quot;jd_|jx_&quot;</span> <span class="hljs-string">&quot;jdCookie|USER_AGENTS|sendNotify|backup&quot;</span> <span class="hljs-string">&quot;&quot;</span> <span class="hljs-string">&quot;master&quot;</span><br>&#125;<br>OR15()&#123;<br>    ql repo https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/ccwav/</span>QLScript.git <span class="hljs-string">&quot;jd_&quot;</span> <span class="hljs-string">&quot;sendNotify.js&quot;</span> <span class="hljs-string">&quot;ql.js&quot;</span><br>&#125;<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-variable">$&#123;OtherRepo[@]&#125;</span>; <span class="hljs-keyword">do</span><br>    OR<span class="hljs-variable">$i</span><br>    sleep <span class="hljs-number">5</span><br>done<br><br><br><span class="hljs-comment"># 🍪Ninja</span><br>update_Ninja_normal()&#123;<br>    cd <span class="hljs-regexp">/ql/</span>ninja/backend &amp;&amp; git checkout . &amp;&amp; git pull<br>    pnpm install &amp;&amp; pm2 start<br>    cp sendNotify.js <span class="hljs-regexp">/ql/</span>scripts/sendNotify.js<br>&#125;<br><br>check_Ninja_normal()&#123;<br>    NOWTIME=$(date +%Y-%m-%d-%H-%M-%S)<br>    i=<span class="hljs-number">0</span><br>    <span class="hljs-keyword">while</span> ((i&lt;=<span class="hljs-number">0</span>)); <span class="hljs-keyword">do</span><br>        echo <span class="hljs-string">&quot;扫描 Ninja 是否在线&quot;</span><br>        ps -fe|grep ninja|grep -v grep<br>        <span class="hljs-keyword">if</span> [ $? -ne <span class="hljs-number">0</span> ]; then<br>            i=<span class="hljs-number">0</span><br>            echo <span class="hljs-variable">$NOWTIME</span><span class="hljs-string">&quot; 扫描结束！Ninja 掉线了不用担心马上重启！&quot;</span><br>            cd /ql<br>            ps -ef|grep ninja|grep -v grep|awk <span class="hljs-string">&#x27;&#123;print $1&#125;&#x27;</span>|xargs kill -<span class="hljs-number">9</span><br>            cd <span class="hljs-regexp">/ql/</span>ninja/backend<br>            pnpm install<br>            pm2 start<br>            ps -fe|grep Daemon |grep -v grep <br>            <span class="hljs-keyword">if</span> [ $? -ne <span class="hljs-number">1</span> ]; then<br>                i=<span class="hljs-number">1</span><br>                echo <span class="hljs-variable">$NOWTIME</span><span class="hljs-string">&quot; Ninja 重启完成！&quot;</span><br>                curl <span class="hljs-string">&quot;https://api.telegram.org/bot$TG_BOT_TOKEN/sendMessage?chat_id=$TG_USER_ID&amp;text=Ninja 已重启完成&quot;</span><br>            fi<br>        <span class="hljs-keyword">else</span><br>            i=<span class="hljs-number">1</span><br>            echo <span class="hljs-variable">$NOWTIME</span><span class="hljs-string">&quot; 扫描结束！Ninja 还在！&quot;</span><br>        fi<br>    done<br>&#125;<br><br><span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;$Ninja&quot;</span> = <span class="hljs-string">&quot;up&quot;</span> ]; then<br>    update_Ninja_normal &amp;<br>elif [ <span class="hljs-string">&quot;$Ninja&quot;</span> = <span class="hljs-string">&quot;on&quot;</span> ]; then<br>    check_Ninja_normal<br>fi<br><br><br><span class="hljs-comment"># 📦依赖</span><br>install_packages_normal()&#123;<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-variable">$@</span>; <span class="hljs-keyword">do</span><br>        case <span class="hljs-variable">$i</span> <span class="hljs-keyword">in</span><br>            canvas)<br>                cd <span class="hljs-regexp">/ql/</span>scripts<br>                <span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;$(echo $(npm ls $i) | grep ERR)&quot;</span> != <span class="hljs-string">&quot;&quot;</span> ]]; then<br>                    npm uninstall <span class="hljs-variable">$i</span><br>                fi<br>                <span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;$(npm ls $i)&quot;</span> =~ (empty) ]]; then<br>                    apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev &amp;&amp; npm i <span class="hljs-variable">$i</span> --prefix <span class="hljs-regexp">/ql/</span>scripts --build-from-source<br>                fi<br>                ;;<br>            *)<br>                <span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;$(npm ls $i)&quot;</span> =~ <span class="hljs-variable">$i</span> ]]; then<br>                    npm uninstall <span class="hljs-variable">$i</span><br>                elif [[ <span class="hljs-string">&quot;$(echo $(npm ls $i -g) | grep ERR)&quot;</span> != <span class="hljs-string">&quot;&quot;</span> ]]; then<br>                    npm uninstall <span class="hljs-variable">$i</span> -g<br>                fi<br>                <span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;$(npm ls $i -g)&quot;</span> =~ (empty) ]]; then<br>                    [[ <span class="hljs-variable">$i</span> = <span class="hljs-string">&quot;typescript&quot;</span> ]] &amp;&amp; npm i <span class="hljs-variable">$i</span> -g --force || npm i <span class="hljs-variable">$i</span> -g<br>                fi<br>                ;;<br>        esac<br>    done<br>&#125;<br><br>install_packages_force()&#123;<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-variable">$@</span>; <span class="hljs-keyword">do</span><br>        case <span class="hljs-variable">$i</span> <span class="hljs-keyword">in</span><br>            canvas)<br>                cd <span class="hljs-regexp">/ql/</span>scripts<br>                <span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;$(npm ls $i)&quot;</span> =~ <span class="hljs-variable">$i</span> &amp;&amp; <span class="hljs-string">&quot;$(echo $(npm ls $i) | grep ERR)&quot;</span> != <span class="hljs-string">&quot;&quot;</span> ]]; then<br>                    npm uninstall <span class="hljs-variable">$i</span><br>                    rm -rf <span class="hljs-regexp">/ql/</span>scripts<span class="hljs-regexp">/node_modules/</span><span class="hljs-variable">$i</span><br>                    rm -rf <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/lib/</span>node_modules<span class="hljs-regexp">/lodash/</span>*<br>                fi<br>                <span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;$(npm ls $i)&quot;</span> =~ (empty) ]]; then<br>                    apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev &amp;&amp; npm i <span class="hljs-variable">$i</span> --prefix <span class="hljs-regexp">/ql/</span>scripts --build-from-source --force<br>                fi<br>                ;;<br>            *)<br>                cd <span class="hljs-regexp">/ql/</span>scripts<br>                <span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;$(npm ls $i)&quot;</span> =~ <span class="hljs-variable">$i</span> ]]; then<br>                    npm uninstall <span class="hljs-variable">$i</span><br>                    rm -rf <span class="hljs-regexp">/ql/</span>scripts<span class="hljs-regexp">/node_modules/</span><span class="hljs-variable">$i</span><br>                    rm -rf <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/lib/</span>node_modules<span class="hljs-regexp">/lodash/</span>*<br>                elif [[ <span class="hljs-string">&quot;$(npm ls $i -g)&quot;</span> =~ <span class="hljs-variable">$i</span> &amp;&amp; <span class="hljs-string">&quot;$(echo $(npm ls $i -g) | grep ERR)&quot;</span> != <span class="hljs-string">&quot;&quot;</span> ]]; then<br>                    npm uninstall <span class="hljs-variable">$i</span> -g<br>                    rm -rf <span class="hljs-regexp">/ql/</span>scripts<span class="hljs-regexp">/node_modules/</span><span class="hljs-variable">$i</span><br>                    rm -rf <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/lib/</span>node_modules<span class="hljs-regexp">/lodash/</span>*<br>                fi<br>                <span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;$(npm ls $i -g)&quot;</span> =~ (empty) ]]; then<br>                    npm i <span class="hljs-variable">$i</span> -g --force<br>                fi<br>                ;;<br>        esac<br>    done<br>&#125;<br><br>install_packages_all()&#123;<br>    install_packages_normal <span class="hljs-variable">$package_name</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-variable">$package_name</span>; <span class="hljs-keyword">do</span><br>        install_packages_force <span class="hljs-variable">$i</span><br>    done<br>&#125;<br><br>install_requirements()&#123;<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-variable">$requirement_name</span>; <span class="hljs-keyword">do</span><br>        case <span class="hljs-variable">$i</span> <span class="hljs-keyword">in</span><br>            cryptography~=<span class="hljs-number">3.2</span>.<span class="hljs-number">1</span>)<br>                cd <span class="hljs-regexp">/ql/</span>scripts<br>                <span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;$(pip3 freeze)&quot;</span> =~ <span class="hljs-string">&quot;cryptography==3.2.1&quot;</span> ]]; then<br>                    echo <span class="hljs-string">&quot;cryptography==3.2.1 已安装&quot;</span><br>                <span class="hljs-keyword">else</span><br>                    apk add --no-cache gcc libffi-dev musl-dev openssl-dev python3-dev &amp;&amp; pip3 install cryptography~=<span class="hljs-number">3.2</span>.<span class="hljs-number">1</span><br>                fi<br>                ;;<br>            *)<br>                <span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;$(pip3 freeze)&quot;</span> =~ <span class="hljs-variable">$i</span> ]]; then<br>                    echo <span class="hljs-string">&quot;$i 已安装&quot;</span><br>                <span class="hljs-keyword">else</span><br>                    pip3 install <span class="hljs-variable">$i</span><br>                fi<br>        esac<br>    done<br>&#125;<br><br>case <span class="hljs-variable">$dependencies</span> <span class="hljs-keyword">in</span><br>    yes)<br>    install_packages_all &amp;<br>    install_requirements &amp;<br>    ;;<br>    p)<br>    install_packages_all &amp;<br>    ;;<br>    r)<br>    install_requirements &amp; <br>    ;;   <br>esac<br><br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8A%80%E6%9C%AF/" class="category-chain-item">技术</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%8A%80%E6%9C%AF/">#技术</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>青龙拉取常用京东脚本库</div>
+      <div>https://hexo.s0r4.com/2023/06/06/青龙拉取常用京东脚本库/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Sora</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>June 6, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/06/06/dansi%E4%BB%8Eesim%E5%88%87%E6%8D%A2%E5%AE%9E%E4%BD%93sim%E6%96%B9%E6%B3%95/" title="dansi从esim切换实体sim方法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">dansi从esim切换实体sim方法</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/06/06/Proxmox%20%E9%85%8D%E7%BD%AE%20IPv4%20NAT%20+%20%E7%8B%AC%E7%AB%8B%20IPv6%20%E6%95%99%E7%A8%8B/" title="Proxmox 配置 IPv4 NAT + 独立 IPv6 教程">
+                        <span class="hidden-mobile">Proxmox 配置 IPv4 NAT + 独立 IPv6 教程</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'SoraKasvgano/hexo');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

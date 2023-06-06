@@ -1,0 +1,730 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Sora">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="docker运用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ARM设备docker”一键“搭ts3服务器">
+<meta property="og:url" content="https://hexo.s0r4.com/2023/06/06/ARM%E8%AE%BE%E5%A4%87docker%E2%80%9D%E4%B8%80%E9%94%AE%E2%80%9C%E6%90%ADts3%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
+<meta property="og:site_name" content="缘之空">
+<meta property="og:description" content="docker运用">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-06-06T16:18:26.000Z">
+<meta property="article:modified_time" content="2023-06-06T08:33:24.458Z">
+<meta property="article:author" content="Sora">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Armbian">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>ARM设备docker”一键“搭ts3服务器 - 缘之空</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"hexo.s0r4.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>缘之空</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://samoyed.lofer.com">
+                <i class="iconfont icon-images"></i>
+                <span>Gallery</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="ARM设备docker”一键“搭ts3服务器"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-06 16:18" pubdate>
+          June 6, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.1k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          26 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ARM设备docker”一键“搭ts3服务器</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>TeamSpeak3是全球流行的团队语音通讯工具软件，OW赛事指定语音供应商，官网<a target="_blank" rel="noopener" href="https://teamspeak.com/">https://teamspeak.com/</a> ，相信国内很多玩FPS的玩家都有用到，比如战地1、4、3、V、CSGO、COD、OW等。</p>
+<p>优点：<br>低延迟毫秒级超低延迟，适合于对语音即时通讯有严格要求的团队游戏、远程会议等场合<br>高品质语音编码格式丰富，支持SPEEX、CELT、OPUS不同质量的语音编码<br>更保密基于不对称加密方式（RSA加密算法），对用户认证、语音传输进行加密，保护用户隐私<br>客户端相比于YY铺天盖地的广告简直就是一股清流，占用资源少，无广告。<br>缺点：官方未开源、官方并未提供arm服务器软件支持</p>
+<p>服务器方面国内代理商也有出租，例如ts1，但服务器按人数容量收费价格仍然偏高，并且因为他们使用的是TEASPEAK盗版服务端，目前已被TS官方拉黑。所以不如用自己玩客云搭建一个arm teamspeak3正版语音服务器。<br>(该教程理论上适用于所有运行LINUX的armv7\v8设备，Nanopi、Orangepi、路由、树莓派等)</p>
+<p>这里的客户端仍可以使用他们的国内客户端<br>客户端下载<br><a target="_blank" rel="noopener" href="http://www.ts1.cn/download">http://www.ts1.cn/download</a><br>（不推荐服务器安装宝塔，宝塔默认会禁行所有UDP端口，BT放行只会放行TCP，需要手动禁用防火墙，有web业务需求可使用LNMP脚本<a target="_blank" rel="noopener" href="https://lnmp.org/install.html">https://lnmp.org/install.html</a> sql安装时不要选择innodb太吃内存 ）</p>
+<h3 id="1-安装docker"><a href="#1-安装docker" class="headerlink" title="1.安装docker"></a>1.安装docker</h3><p><code>wget -qO- https://get.docker.com/ | sh</code><br>这里使用一键安装，如果想使用官方正宗方法安装可以参考这里 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/SoraKasvgano/articles/15189565.html">在Linux上安装Docker的两种方法</a></p>
+<h3 id="2-获取并使用阿里云docker镜像加速"><a href="#2-获取并使用阿里云docker镜像加速" class="headerlink" title="2.获取并使用阿里云docker镜像加速"></a>2.获取并使用阿里云docker镜像加速</h3><p><code>https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors</code><br>获取自己的加速地址</p>
+<h3 id="3-应用第2步获得的镜像地址加速"><a href="#3-应用第2步获得的镜像地址加速" class="headerlink" title="3.应用第2步获得的镜像地址加速"></a>3.应用第2步获得的镜像地址加速</h3><p>使用winscp或者其他软件vi或vim 编辑&#x2F;etc&#x2F;docker&#x2F;daemon.json<br>示例</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs prolog">&#123;<br><span class="hljs-string">&quot;registry-mirrors&quot;</span>: [<span class="hljs-string">&quot;你的阿里云加速镜像地址&quot;</span>,<span class="hljs-string">&quot;https://dockerhub.azk8s.cn&quot;</span>,<span class="hljs-string">&quot;https://reg-mirror.qiniu.com&quot;</span>]<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>保存然后在ssh输入<br><code>sudo systemctl daemon-reload</code><br>回车<br><code>sudo systemctl restart docker</code><br>回车</p>
+<h3 id="4-安装Docker-Web图形化界面portainer（可选）"><a href="#4-安装Docker-Web图形化界面portainer（可选）" class="headerlink" title="4.安装Docker Web图形化界面portainer（可选）"></a>4.安装Docker Web图形化界面portainer（可选）</h3><p>这里为了方便选择安装portainer图形化界面，熟悉docker命令的朋友可以不装<br>ssh中操作<br><code>docker volume create portainer_data</code><br>回车<br><code>docker run -d -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest</code><br>回车<br>然后访问 http:&#x2F;&#x2F;你的主机地址:9000 设置好用户名密码 登录</p>
+<h3 id="5-安装ts3server与客户端管理权获取"><a href="#5-安装ts3server与客户端管理权获取" class="headerlink" title="5.安装ts3server与客户端管理权获取"></a>5.安装ts3server与客户端管理权获取</h3><p>该镜像由ertagh制作（<a target="_blank" rel="noopener" href="https://github.com/ertagh/teamspeak3-server-arm">github</a>地址欢迎大家点赞）<br>对于armv8 64位处理器、64位系统可以在ssh中操作<br><code>docker run -d --name TeamSpeak3_Server -e TIME_ZONE=Asia/Shanghai -p 9987:9987/udp -p 10011:10011/tcp -p 30033:30033/tcp --restart=unless-stopped -v ts3:/teamspeak/save/ ertagh/teamspeak3-server:latest-predownloaded</code></p>
+<p>对于armv7 32位处理器、32位系统可以在ssh中操作，该镜像使用box86进行模拟，效率更高更快(其实ARM 64位处理器也推荐)<br><code>docker run -d --name TeamSpeak3_Server -e TIME_ZONE=Asia/Shanghai -p 9987:9987/udp -p 10011:10011/tcp -p 30033:30033/tcp --restart=unless-stopped -v ts3:/teamspeak/save/ ertagh/teamspeak3-server:arm32v7-latest-box86-predownloaded</code></p>
+<h3 id="6-端口映射"><a href="#6-端口映射" class="headerlink" title="6.端口映射"></a>6.端口映射</h3><p>如果服务器有防火墙记得开放 UDP 9987端口 TCP 10011 30033端口，路由器外网端口映射同理。</p>
+<h3 id="7-查看TS3服务器超管密钥与客户端使用"><a href="#7-查看TS3服务器超管密钥与客户端使用" class="headerlink" title="7.查看TS3服务器超管密钥与客户端使用"></a>7.查看TS3服务器超管密钥与客户端使用</h3><p>在portainer中打开ts3容器的log界面看到version xxx installed succesfully意味着运行成功，找到Important相关信息如loginname&#x3D;”xxxx”,password&#x3D;”xxx” apikey&#x3D;”xxxx”并把它们全部储存在某个地方。<br>然后登陆teamspeak3客户端第一次连接服务器的时候会弹出使用管理员授权key，这时候把记录的apikey输入即可。</p>
+<h3 id="8-忘记密码怎么办"><a href="#8-忘记密码怎么办" class="headerlink" title="8.忘记密码怎么办"></a>8.忘记密码怎么办</h3><p>此处参考文章 <a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv4893931">盒子里的神经怪</a><br>如果你拥有server query的访问权限，请直接跳至步骤6<br>如果你拥有server query的密码但却不记得用户名，请记住server query默认的用户名为serveradmin，然后请跳至步骤6.<br>进入服务器TeamSpeak 3所在的文件夹<br><code>cd /opt/teamspeak3-server_linux_amd64</code><br>首先关闭TeamSpeak 3服务。如果已经把TeamSpeak 3作为服务添加到系统里，请停止服务：<br><code>systemctl stop teamspeak.service</code><br>如果没有作为服务运行，请执行以下来停止TeamSpeak<br><code>./ts3server_startscript.sh stop</code><br>用以下命令启动TeamSpeak 3服务端：<br><code>./ts3server_minimal_runscript.sh serveradmin_password=yOuR_nEwP@ssw0rd</code><br>这一步操作会重置你的<code>serveradmin</code>密码，请自行替换<code>yOuR_nEwP@ssw0rd</code>为你想要的密码。<br>打开任意telnet客户端，比如PuTTy telnet 你的服务器IP:10011<br>输入<code>login serveradmin yOuR_nEwP@ssw0rd</code><br>yOuR_nEwP@ssw0rd是你刚刚重设的密码<br>选择teamSpeak instance，默认为1, use 1并回车，现在输入以下命令来生成token<br><code>tokenadd tokentype=0 tokenid1=6 tokenid2=0</code><br>这一步会生成新的token并打印在telnet客户端界面，复制好后进入客户端，连接到你自己的服务器，然后选择“权限” –&gt; “使用权限秘钥”，完成！在此之后关闭.&#x2F;ts3server_minimal_runscript.sh，使用你正常的方式启动TeamSpeak 3服务端即可。</p>
+<h3 id="9-不想用docker建立TS3服务器怎么办"><a href="#9-不想用docker建立TS3服务器怎么办" class="headerlink" title="9.不想用docker建立TS3服务器怎么办"></a>9.不想用docker建立TS3服务器怎么办</h3><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv4543306">可以参考此篇文章</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8A%80%E6%9C%AF/" class="category-chain-item">技术</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%8A%80%E6%9C%AF/">#技术</a>
+      
+        <a href="/tags/Linux/">#Linux</a>
+      
+        <a href="/tags/Armbian/">#Armbian</a>
+      
+        <a href="/tags/Docker/">#Docker</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>ARM设备docker”一键“搭ts3服务器</div>
+      <div>https://hexo.s0r4.com/2023/06/06/ARM设备docker”一键“搭ts3服务器/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Sora</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>June 6, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/06/06/%E6%96%B0%E8%A3%85armbian%E5%85%B3%E9%97%ADzram%E5%8F%8A%E6%97%A5%E5%BF%97/" title="新装armbian关闭zram及日志">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">新装armbian关闭zram及日志</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/06/06/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85%E5%90%8E%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE%E5%8F%8A%E4%BC%98%E5%8C%96/" title="树莓派安装后常用设置及优化">
+                        <span class="hidden-mobile">树莓派安装后常用设置及优化</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'SoraKasvgano/hexo');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
