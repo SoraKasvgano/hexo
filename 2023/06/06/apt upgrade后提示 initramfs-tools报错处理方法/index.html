@@ -24,7 +24,7 @@
 <meta property="og:description" content="apt报错处理">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-06T16:14:30.000Z">
-<meta property="article:modified_time" content="2023-06-27T02:20:54.718Z">
+<meta property="article:modified_time" content="2023-06-27T02:27:52.023Z">
 <meta property="article:author" content="Sora">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="Linux">
@@ -301,7 +301,7 @@
               <div class="markdown-body">
                 
                 <h3 id="initramfs-tools报错"><a href="#initramfs-tools报错" class="headerlink" title="initramfs-tools报错"></a>initramfs-tools报错</h3><p>apt upgrade之后提示<br>Errors were encountered while processing:<br> initramfs-tools<br>E: Sub-process &#x2F;usr&#x2F;bin&#x2F;dpkg returned an error code (1)<br>原因是没有足够空间<br>ln: failed to create hard link ‘&#x2F;boot&#x2F;initrd.img-5.9.0-rc7-aml-s812.dpkg-bak’ &#x3D;&gt; ‘&#x2F;boot&#x2F;initrd.img-5.9.0-rc7-aml-s812’: Operation not permitted<br>update-initramfs: Generating &#x2F;boot&#x2F;initrd.img-5.9.0-rc7-aml-s812<br>cp: error writing ‘&#x2F;var&#x2F;tmp&#x2F;mkinitramfs_qVbUIa&#x2F;&#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;systemd-udevd’: No space left on device</p>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>在<a target="_blank" rel="noopener" href="https://ubuntuforums.org/showthread.php?t=1990236">https://ubuntuforums.org/showthread.php?t=1990236</a> ：</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>在<code>https://ubuntuforums.org/showthread.php?t=1990236</code> ：</p>
 <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs gradle">sudo rm -f <span class="hljs-regexp">/var/</span>lib<span class="hljs-regexp">/dpkg/i</span>nfo/initramfs-tools.post*<br><br>sudo rm -f <span class="hljs-regexp">/var/</span>lib<span class="hljs-regexp">/dpkg/i</span>nfo/initramfs-tools.pre*<br><br>sudo rm -f <span class="hljs-regexp">/var/</span>lib<span class="hljs-regexp">/dpkg/i</span>nfo/bcmwl-kernel-<span class="hljs-keyword">source</span>.post*<br>sudo rm -f <span class="hljs-regexp">/var/</span>lib<span class="hljs-regexp">/dpkg/i</span>nfo/bcmwl-kernel-<span class="hljs-keyword">source</span>.pre*<br><br>sudo dpkg --configure -a<br></code></pre></td></tr></table></figure>
                 
               </div>
