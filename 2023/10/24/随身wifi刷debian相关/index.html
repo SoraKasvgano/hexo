@@ -24,7 +24,7 @@
 <meta property="og:description" content="查看sim卡状态1mmcli -m 0  看Status就可以知道当前卡的状态和信号强度如果返回error: couldn&#39;t find modem，可以把你全分区备份里的modem分区用7zip解压了放到&#x2F;lib&#x2F;firmware&#x2F;大概可以解决4g用不了的问题 切换esim切换需要至少几十秒的时间，不要着急，连上了自然有网，可以用上面的那条命令检查卡是否识别">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-24T16:54:51.000Z">
-<meta property="article:modified_time" content="2023-10-24T09:00:36.605Z">
+<meta property="article:modified_time" content="2023-10-24T09:04:42.573Z">
 <meta property="article:author" content="Sora">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="Debian">
@@ -245,7 +245,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          9.4k words
+          9.8k words
         
       </span>
     
@@ -256,7 +256,7 @@
         
         
         
-          79 mins
+          82 mins
         
       </span>
     
@@ -394,6 +394,12 @@
 <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs gradle">#!<span class="hljs-regexp">/bin/</span>sh<br><br>sleep <span class="hljs-number">5</span><br><span class="hljs-keyword">grep</span> <span class="hljs-number">0</span> <span class="hljs-regexp">/sys/</span>kernel<span class="hljs-regexp">/debug/u</span>sb<span class="hljs-regexp">/ci_hdrc.0/</span>device | <span class="hljs-keyword">grep</span> speed<br><span class="hljs-keyword">if</span> [ $? -eq <span class="hljs-number">0</span> ]<br>then<br>echo host &gt; <span class="hljs-regexp">/sys/</span>kernel<span class="hljs-regexp">/debug/u</span>sb<span class="hljs-regexp">/ci_hdrc.0/</span>role<br>echo usb-host &gt;<span class="hljs-regexp">/sys/</span><span class="hljs-keyword">class</span><span class="hljs-regexp">/leds/g</span>reen\:internet/trigger<br>#echo timer &gt; <span class="hljs-regexp">/sys/</span><span class="hljs-keyword">class</span><span class="hljs-regexp">/leds/g</span>reen\:internet/trigger<br>#echo <span class="hljs-number">1</span> &gt; <span class="hljs-regexp">/sys/</span><span class="hljs-keyword">class</span><span class="hljs-regexp">/leds/g</span>reen\:internet/delay_on<br>#echo <span class="hljs-number">1999</span>&gt; <span class="hljs-regexp">/sys/</span><span class="hljs-keyword">class</span><span class="hljs-regexp">/leds/g</span>reen\:internet/delay_off<br><span class="hljs-keyword">else</span><br>echo usb-gadget &gt;<span class="hljs-regexp">/sys/</span><span class="hljs-keyword">class</span><span class="hljs-regexp">/leds/g</span>reen\:internet/trigger<br>fi<br><br>sleep <span class="hljs-number">25</span><br>date -s <span class="hljs-string">&quot;`mmcli -m 0  --time|grep -E &quot;</span>Time <span class="hljs-string">&quot;  | awk -F &quot;</span> <span class="hljs-string">&quot;  &#x27;&#123;print $5,$NF&#125;&#x27;|awk -F &quot;</span>+<span class="hljs-string">&quot; &#x27;&#123;print $1,$3&#125;&#x27;|awk -F &quot;</span>T<span class="hljs-string">&quot;  &#x27;&#123;print $1,$2&#125;&#x27;| awk &#x27;&#123;gsub(/^\s+|\s+$/, &quot;</span><span class="hljs-string">&quot;);print&#125;&#x27;`&quot;</span> &amp;&amp; date -s <span class="hljs-string">&quot;`date -d +8hour &#x27;+%Y-%m-%d %H:%M:%S&#x27;`&quot;</span><br><br>bash <span class="hljs-regexp">/etc/</span>NetworkManager<span class="hljs-regexp">/dispatcher.d/</span>dhcpv6 wwan0 &amp;<br></code></pre></td></tr></table></figure>
 
 
+
+<p>补充一下nftables的转发规则  </p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs routeros">nft <span class="hljs-built_in">add</span> table ip6<span class="hljs-built_in"> nat </span> <br>nft flush table ip6<span class="hljs-built_in"> nat </span> <br>nft <span class="hljs-built_in">add</span> chain ip6<span class="hljs-built_in"> nat </span>postrouting <span class="hljs-string">&#x27;&#123; type nat hook postrouting priority 100; &#125;&#x27;</span>  <br>nft <span class="hljs-built_in">add</span> rule ip6<span class="hljs-built_in"> nat </span>postrouting ip6 saddr <span class="hljs-string">&quot;<span class="hljs-variable">$prefix</span>::/64&quot;</span> ip6 daddr != <span class="hljs-string">&quot;<span class="hljs-variable">$prefix</span>::/64&quot;</span> counter masquerade  <br></code></pre></td></tr></table></figure>
+
+
+<p>重启后wlan0没起来，检查是nmtui新建WiFi的时候WiFi密码没保存成功。解决方法：<br>在<code>/etc/NetworkManaget/systen-connections/你的WiFi配置名.nmconnection</code>文件中，<code>key-mgmt</code>行下加入一行: <code>psk=你的WiFi密码</code>，保存后执行<code>nmcli c reload</code>即可立即生效。</p>
 <p>转自<code>https://zyyme.com/msm8916-wifi.html</code>备忘使用</p>
 
                 
