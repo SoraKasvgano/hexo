@@ -24,7 +24,7 @@
 <meta property="og:description" content="新增路由">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-06T15:30:53.000Z">
-<meta property="article:modified_time" content="2023-10-24T09:04:42.573Z">
+<meta property="article:modified_time" content="2023-11-08T02:14:55.098Z">
 <meta property="article:author" content="Sora">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="Linux">
@@ -248,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          303 words
+          4.6k words
         
       </span>
     
@@ -259,7 +259,7 @@
         
         
         
-          3 mins
+          39 mins
         
       </span>
     
@@ -303,7 +303,50 @@
                 
                 <p>解决openwrt和宿主机不能互通的问题<br>出自：<a target="_blank" rel="noopener" href="https://aoyouer.com/posts/macvlan-host/">https://aoyouer.com/posts/macvlan-host/</a><br>之前为了解决这个问题，百度了很久，都是看不懂的废话<br>还是这个blog言简意赅，直接上代码，搞定</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs routeros">ip link <span class="hljs-built_in">add</span> mynet link eth0<span class="hljs-built_in"> type </span>macvlan mode<span class="hljs-built_in"> bridge</span><br><span class="hljs-built_in">ip </span>addr <span class="hljs-built_in">add</span> 192.168.0.50(为虚拟网卡分配的ip) dev mynet<span class="hljs-built_in"></span><br><span class="hljs-built_in">ip </span>link <span class="hljs-built_in">set</span> mynet up<span class="hljs-built_in"></span><br><span class="hljs-built_in">ip route </span><span class="hljs-built_in">add</span> 192.168.0.20（容器的ip） dev mynet<br></code></pre></td></tr></table></figure>
-<p>上面的命令执行后，立刻就能双向ping通了<br>重启后消失，可以加入&#x2F;etc&#x2F;rc.local</p>
+<p>上面的命令执行后，立刻就能双向ping通了<br>重启后消失，可以加入<code>/etc/rc.local</code></p>
+<p>2023.11.8日更新，推荐阅读。<br>完整的教程出自<code>https://blog.oddbit.com/post/2018-03-12-using-docker-macvlan-networks/#host-access</code><br>为openwrt创建macvlan时注意限定范围</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs livescript">docker network create -d macvlan -o parent=eth0 <span class="hljs-string">\</span><br>  --subnet <span class="hljs-number">192.168</span>.<span class="hljs-number">1.0</span>/<span class="hljs-number">24</span> <span class="hljs-string">\</span><br>  --gateway <span class="hljs-number">192.168</span>.<span class="hljs-number">1.254</span> <span class="hljs-string">\</span><br>  --ip-range <span class="hljs-number">192.168</span>.<span class="hljs-number">1.2</span>/<span class="hljs-number">27</span>(openwrt容器ip) <span class="hljs-string">\</span><br>  --aux-address <span class="hljs-string">&#x27;host=192.168.1.3&#x27;</span>（宿主机用于与容器连接的） <span class="hljs-string">\</span><br>  openwrtnet<br></code></pre></td></tr></table></figure>
+<p>新建桥接网络，使宿主机和容器连接，可以加入<code>/etc/rc.local</code>中</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">ip link <span class="hljs-built_in">add</span> openwrtnet-shim link eth0<span class="hljs-built_in"> type </span>macvlan  mode<span class="hljs-built_in"> bridge</span><br><span class="hljs-built_in">ip </span>addr <span class="hljs-built_in">add</span> 192.168.1.3/32 dev openwrtnet-shim<span class="hljs-built_in"></span><br><span class="hljs-built_in">ip </span>link <span class="hljs-built_in">set</span> openwrtnet-shim up<br></code></pre></td></tr></table></figure>
+
+<p>原文：<br>A question that crops up regularly on <a target="_blank" rel="noopener" href="https://docs.docker.com/opensource/ways/#docker-users">#docker</a> is “How do I attach a container directly to my local network?” One possible answer to that question is the <a target="_blank" rel="noopener" href="https://docs.docker.com/network/macvlan/">macvlan</a> network type, which lets you create “clones” of a physical interface on your host and use that to attach containers directly to your local network. For the most part it works great, but it does come with some minor caveats and limitations. I would like to explore those here.</p>
+<p>For the purpose of this example, let’s say we have a host interface <code>eno1</code> that looks like this:</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">eno1</span>: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu <span class="hljs-number">1500</span> qdisc fq_codel state UP group default qlen <span class="hljs-number">1000</span><br>    <span class="hljs-attribute">link</span>/ether <span class="hljs-number">64</span>:<span class="hljs-number">00</span>:<span class="hljs-number">6</span>a:<span class="hljs-number">7</span>d:<span class="hljs-number">06</span>:<span class="hljs-number">1</span>a brd ff:ff:ff:ff:ff:ff<br>    <span class="hljs-attribute">inet</span> <span class="hljs-number">192.168.1.24</span>/<span class="hljs-number">24</span> brd <span class="hljs-number">192.168.1.255</span> scope global dynamic eno1<br>       <span class="hljs-attribute">valid_lft</span> <span class="hljs-number">73303</span>sec preferred_lft <span class="hljs-number">73303</span>sec<br>    <span class="hljs-attribute">inet6</span> fe80::b2c9:<span class="hljs-number">3793</span>:<span class="hljs-number">303</span>:<span class="hljs-number">2</span>a55/<span class="hljs-number">64</span> scope link <br>       <span class="hljs-attribute">valid_lft</span> forever preferred_lft forever<br></code></pre></td></tr></table></figure>
+
+<p>To create a macvlan network named <code>mynet</code> attached to that interface, you might run something like this:</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">docker network <span class="hljs-built_in">create</span> -d macvlan -o parent=eno1 \<br>  <span class="hljs-comment">--subnet 192.168.1.0/24 \</span><br>  <span class="hljs-comment">--gateway 192.168.1.1 \</span><br>  mynet<br></code></pre></td></tr></table></figure>
+
+<p>…but don’t do that.</p>
+<h2 id="Address-assignment"><a href="#Address-assignment" class="headerlink" title="Address assignment"></a>Address assignment</h2><p>When you create a container attached to your macvlan network, Docker will select an address from the subnet range and assign it to your container. This leads to the potential for conflicts: if Docker picks an address that has already been assigned to another host on your network, you have a problem!</p>
+<p>You can avoid this by reserving a portion of the subnet range for use by Docker. There are two parts to this solution:</p>
+<ul>
+<li><p>You must configure any DHCP service on your network such that it will not assign addresses in a given range.</p>
+</li>
+<li><p>You must tell Docker about that reserved range of addresses.</p>
+</li>
+</ul>
+<p>How you accomplish the former depends entirely on your local network infrastructure and is beyond the scope of this document. The latter task is accomplished with the <code>--ip-range</code> option to <code>docker network create</code>.</p>
+<p>On my local network, my DHCP server will not assign any addresses above <code>192.168.1.190</code>. I have decided to assign to Docker the subset <code>192.168.1.192/27</code>, which is a range of 32 address starting at 192.168.1.192 and ending at 192.168.1.223. The corresponding <code>docker network create</code> command would be:</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">docker network <span class="hljs-built_in">create</span> -d macvlan -o parent=eno1 \<br>  <span class="hljs-comment">--subnet 192.168.1.0/24 \</span><br>  <span class="hljs-comment">--gateway 192.168.1.1 \</span><br>  <span class="hljs-comment">--ip-range 192.168.1.192/27 \</span><br>  mynet<br></code></pre></td></tr></table></figure>
+
+<p>Now it is possible to create containers attached to my local network without worrying about the possibility of ip address conflicts.</p>
+<h2 id="Host-access"><a href="#Host-access" class="headerlink" title="Host access"></a>Host access</h2><p>With a container attached to a macvlan network, you will find that while it can contact other systems on your local network without a problem, the container will not be able to connect to your host (and your host will not be able to connect to your container). This is a limitation of macvlan interfaces: without special support from a network switch, your host is unable to send packets to its own macvlan interfaces.</p>
+<p>Fortunately, there is a workaround for this problem: you can create another macvlan interface on your host, and use that to communicate with containers on the macvlan network.</p>
+<p>First, I’m going to reserve an address from our network range for use by the host interface by using the <code>--aux-address</code> option to <code>docker network create</code>. That makes our final command line look like:</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs livescript">docker network create -d macvlan -o parent=eno1 <span class="hljs-string">\</span><br>  --subnet <span class="hljs-number">192.168</span>.<span class="hljs-number">1.0</span>/<span class="hljs-number">24</span> <span class="hljs-string">\</span><br>  --gateway <span class="hljs-number">192.168</span>.<span class="hljs-number">1.1</span> <span class="hljs-string">\</span><br>  --ip-range <span class="hljs-number">192.168</span>.<span class="hljs-number">1.192</span>/<span class="hljs-number">27</span> <span class="hljs-string">\</span><br>  --aux-address <span class="hljs-string">&#x27;host=192.168.1.223&#x27;</span> <span class="hljs-string">\</span><br>  mynet<br></code></pre></td></tr></table></figure>
+
+<p>This will prevent Docker from assigning that address to a container.</p>
+<p>Next, we create a new macvlan interface on the host. You can call it whatever you want, but I’m calling this one <code>mynet-shim</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ip <span class="hljs-built_in">link</span> add mynet-shim <span class="hljs-built_in">link</span> eno1 <span class="hljs-built_in">type</span> macvlan  mode bridge<br></code></pre></td></tr></table></figure>
+
+<p>Now we need to configure the interface with the address we reserved and bring it up:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">ip addr <span class="hljs-built_in">add</span> 192.168.1.223/32 dev mynet-shim<span class="hljs-built_in"></span><br><span class="hljs-built_in">ip </span>link <span class="hljs-built_in">set</span> mynet-shim up<br></code></pre></td></tr></table></figure>
+
+<p>The last thing we need to do is to tell our host to use that interface when communicating with the containers. This is relatively easy because we have restricted our containers to a particular CIDR subset of the local network; we just add a route to that range like this:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">ip<span class="hljs-built_in"> route </span><span class="hljs-built_in">add</span> 192.168.1.192/27 dev mynet-shim<br></code></pre></td></tr></table></figure>
+
+<p>With that route in place, your host will automatically use ths <code>mynet-shim</code> interface when communicating with containers on the <code>mynet</code> network.</p>
+<p>Note that the interface and routing configuration presented here is not persistent – you will lose if if you were to reboot your host. How to make it persistent is distribution dependent.</p>
 
                 
               </div>
