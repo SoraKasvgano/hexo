@@ -27,7 +27,7 @@
 <meta property="og:description" content="环境设置1、打开网卡混杂模式，其中enp1s0根据ifconfig命令找到自己的本地网卡名称替换 sudo ip link set enp1s0 promisc on 2、创建名称为macvlan的虚拟网卡，并指定网关gateway、子网网段subnet、虚拟网卡的真实父级网卡parent（第一步中的本地网卡名称） docker network create -d macvlan --subnet">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-10-12T08:27:27.000Z">
-<meta property="article:modified_time" content="2024-10-12T01:38:42.091Z">
+<meta property="article:modified_time" content="2024-10-14T01:02:04.913Z">
 <meta property="article:author" content="Sora">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="Linux">
@@ -252,7 +252,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          424 words
+          759 words
         
       </span>
     
@@ -263,7 +263,7 @@
         
         
         
-          4 mins
+          7 mins
         
       </span>
     
@@ -324,7 +324,13 @@
 <p>8、<code>exit</code>退出容器内部环境，在宿主机环境执行重启openwrt网络命令</p>
 <p><code>/etc/init.d/networking restart</code></p>
 <h4 id="Openwrt页面设置"><a href="#Openwrt页面设置" class="headerlink" title="Openwrt页面设置"></a>Openwrt页面设置</h4><p>9、openwrt设置</p>
-<p>进入openwrt网页后台，大多数情况下用户名密码为root&#x2F;password root&#x2F;root<br>在接口里取消lan的br-lan桥接，关闭其IPV6并且忽略DHCP（如需IPV6建议新建WAN6，此处省略）。然后防火墙规则里设置<br><code>iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE</code> </p>
+<p>进入openwrt网页后台，大多数情况下用户名密码为root&#x2F;password root&#x2F;root<br>在接口里取消lan的br-lan桥接，关闭其IPV6并且忽略DHCP然后防火墙规则里设置<br><code>iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE</code> </p>
+<h4 id="补充1：当OPENWRT作为主路由时开启IPV6"><a href="#补充1：当OPENWRT作为主路由时开启IPV6" class="headerlink" title="补充1：当OPENWRT作为主路由时开启IPV6"></a>补充1：当OPENWRT作为主路由时开启IPV6</h4><p>（以下为OP主路由开启IPV6的设置，旁路需要根据情况调整：如需IPV6建议新建WAN6接口，设备修改为@wan，然后来到 lan 的高级设置，勾选<strong>委托 IPv6 前缀</strong>，并将 <strong>IPv6 分配长度</strong>从<strong>禁用</strong>修改为 64 或更小，接着再点击 lan 的 DHCP 服务器中的 IPv6 设置，将 <strong>RA 服务</strong>与 <strong>DHCPv6 服务</strong>都设置为<strong>服务器模式</strong>。最后再来到 lan 的 DHCP 服务器中的 IPv6 RA 设置，勾选<strong>启用 SLAAC</strong>，RA 标记看自己的需求是否需要同时开启 DHCPv6，需要的话勾选**受管配置(M)和其他配置(O)<strong>，不需要则只勾选</strong>其他配置(O)**）。</p>
+<h4 id="补充2：当OPENWRT作为旁路有时开启IPV6"><a href="#补充2：当OPENWRT作为旁路有时开启IPV6" class="headerlink" title="补充2：当OPENWRT作为旁路有时开启IPV6"></a>补充2：当OPENWRT作为旁路有时开启IPV6</h4><p>接口里新建一个LAN6，选择DHCPV6，物理设置里 选择自定义输入“**@lan**” 重要，重要，重要。<br>设置防火墙，在LAN6接口设置里，开启“开机自动运行”“使用内置的IPV6管理”“使用默认网关”“使用对端通告的DNS服务器”。<br>LAN里的IPV6设置，DHCP服务器-基本设置，路由通告服务-服务器模式，DHCPV6服务-已禁用，NDP代理-已禁用。</p>
+<h4 id="补充3：docker启用ipv6"><a href="#补充3：docker启用ipv6" class="headerlink" title="补充3：docker启用ipv6"></a>补充3：docker启用ipv6</h4><ol>
+<li>在 <code>/etc/docker/daemon.json</code> 文件中填下 IPv6 相关配置<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span> <br><span class="hljs-attr">&quot;ipv6&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span> <br><span class="hljs-attr">&quot;ipv6tables&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br><span class="hljs-attr">&quot;experimental&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span> <br><span class="hljs-attr">&quot;fixed-cidr-v6&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2001:db8::/64&quot;</span> <br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure></li>
+<li>重启 Docker<br><code>systemctl restart docker</code></li>
+</ol>
 <p>镜像详细使用方法请参考博客文章:<br><a href="https://hexo.psorai.eu.org/2023/06/06/%E8%A7%A3%E5%86%B3openwrt%E5%92%8C%E5%AE%BF%E4%B8%BB%E6%9C%BA%E4%B8%8D%E8%83%BD%E4%BA%92%E9%80%9A%E7%9A%84%E9%97%AE%E9%A2%98/">解决openwrt容器和宿主机互通问题</a></p>
 
                 
