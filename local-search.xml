@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>群辉容器报tun错误</title>
+    <link href="/2024/11/01/%E7%BE%A4%E8%BE%89%E5%AE%B9%E5%99%A8%E6%8A%A5tun%E9%94%99%E8%AF%AF/"/>
+    <url>/2024/11/01/%E7%BE%A4%E8%BE%89%E5%AE%B9%E5%99%A8%E6%8A%A5tun%E9%94%99%E8%AF%AF/</url>
+    
+    <content type="html"><![CDATA[<p>在群辉运行lanthora&#x2F;candy容器时报stdout &#x2F;dev&#x2F;tun错误，是因为群辉系统默认没有启用该模块导致的。</p><p><code>vim /usr/local/etc/rc.d/tun.sh</code><br>输入内容：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/sh</span><br><br><span class="hljs-comment"># Create the necessary file structure for /dev/net/tun</span><br><span class="hljs-keyword">if</span> ( [ ! -c /dev/net/tun ] ); <span class="hljs-keyword">then</span><br>  <span class="hljs-keyword">if</span> ( [ ! -d /dev/net ] ); <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">mkdir</span> -m 755 /dev/net<br>  <span class="hljs-keyword">fi</span><br>  <span class="hljs-built_in">mknod</span> /dev/net/tun c 10 200<br>  <span class="hljs-built_in">chmod</span> 0755 /dev/net/tun<br><span class="hljs-keyword">fi</span><br><br><span class="hljs-comment"># Load the tun module if not already loaded</span><br><span class="hljs-keyword">if</span> ( !(lsmod | grep -q <span class="hljs-string">&quot;^tun\s&quot;</span>) ); <span class="hljs-keyword">then</span><br>  insmod /lib/modules/tun.ko<br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure><p>给权限：<br><code>chmod 0755 tun.sh</code><br>运行一次<br><code>sudo /usr/local/etc/rc.d/tun.sh</code></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>技术</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>技术</tag>
+      
+      <tag>Linux</tag>
+      
+      <tag>群辉</tag>
+      
+      <tag>docker</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>甲骨文dd以及dd后的坑</title>
     <link href="/2024/10/12/%E7%94%B2%E9%AA%A8%E6%96%87dd%E4%BB%A5%E5%8F%8Add%E5%90%8E%E7%9A%84%E5%9D%91/"/>
     <url>/2024/10/12/%E7%94%B2%E9%AA%A8%E6%96%87dd%E4%BB%A5%E5%8F%8Add%E5%90%8E%E7%9A%84%E5%9D%91/</url>
