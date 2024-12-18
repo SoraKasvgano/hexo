@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>解决frpc无法访问TPlink路由网页问题</title>
+    <link href="/2024/12/18/%E8%A7%A3%E5%86%B3frpc%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AETPlink%E8%B7%AF%E7%94%B1%E7%BD%91%E9%A1%B5/"/>
+    <url>/2024/12/18/%E8%A7%A3%E5%86%B3frpc%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AETPlink%E8%B7%AF%E7%94%B1%E7%BD%91%E9%A1%B5/</url>
+    
+    <content type="html"><![CDATA[<h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>使用frpc访问tplink路由器时会自动跳转<code>tplogin.cn</code>导致访问失败，为此可以设置nginx反代替换解决该问题。</p><h4 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h4><p>原因出在<code>/web-static/dynaform/class.js</code>这个JS下面，它做了前端判别，如果host不正确就会自动跳<code>tplogin.cn</code>，其中<code>PageFunc</code>函数下有一句<code>this.gDomainDNS=&quot;tplogin.cn&quot;</code>，将变量内容替换为自己的域名。</p><h4 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h4><p>在Nginx新建一个vhost，配置内容如下，<code>4399.com</code>替换为你自己的域名（IP加端口应该也差不多）</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">listen</span> <span class="hljs-number">8080</span>;<br>    <span class="hljs-attribute">server_name</span> <span class="hljs-number">4399</span>.com;<br><br>    <span class="hljs-section">location</span> / &#123;<br>        <span class="hljs-attribute">proxy_pass</span> http://192.168.1.1; <span class="hljs-comment"># 路由器的IP</span><br>        <span class="hljs-attribute">sub_filter</span> <span class="hljs-string">&#x27;tplogin.cn&#x27;</span> <span class="hljs-string">&#x27;4399.com&#x27;</span>;<br>        <span class="hljs-attribute">sub_filter_types</span> *;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>进行验证：<code>curl http://4399.com/web-static/dynaform/class.js | grep this.gDomainDNS</code></p><p>参考：<a href="https://www.right.com.cn/forum/thread-1127616-1-1.html">FRP访问TPLINK管理页面失败</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>技术</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>技术</tag>
+      
+      <tag>路由器</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>群辉容器报tun错误</title>
     <link href="/2024/11/01/%E7%BE%A4%E8%BE%89%E5%AE%B9%E5%99%A8%E6%8A%A5tun%E9%94%99%E8%AF%AF/"/>
     <url>/2024/11/01/%E7%BE%A4%E8%BE%89%E5%AE%B9%E5%99%A8%E6%8A%A5tun%E9%94%99%E8%AF%AF/</url>
