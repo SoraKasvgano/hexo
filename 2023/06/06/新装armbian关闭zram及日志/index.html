@@ -27,7 +27,7 @@
 <meta property="og:description" content="关闭zram日志保护储存卡">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-06T16:19:40.000Z">
-<meta property="article:modified_time" content="2025-12-22T23:36:28.445Z">
+<meta property="article:modified_time" content="2025-12-22T23:37:50.451Z">
 <meta property="article:author" content="Sora">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="Linux">
@@ -88,7 +88,7 @@
 
 
   
-<meta name="generator" content="Hexo 6.2.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -312,7 +312,7 @@
 <p>只需要在函数头部返回即可避免rsync：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-function"><span class="hljs-title">syncToDisk</span></span> () &#123;<br>    <span class="hljs-comment"># no sync to protect emmc</span><br>    <span class="hljs-built_in">return</span> 0<br>    isSafe<br> <br>    <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\n<span class="hljs-subst">$(date)</span>: Syncing logs from <span class="hljs-variable">$LOG_TYPE</span> to storage\n&quot;</span> | <span class="hljs-variable">$LOG_OUTPUT</span><br> <br>    <span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$USE_RSYNC</span>&quot;</span> = <span class="hljs-literal">true</span> ]; <span class="hljs-keyword">then</span><br>        <span class="hljs-variable">$&#123;NoCache&#125;</span> rsync -aXWv --delete --exclude armbian-ramlog.log --links <span class="hljs-variable">$RAM_LOG</span> <span class="hljs-variable">$HDD_LOG</span> 2&gt;&amp;1 | <span class="hljs-variable">$LOG_OUTPUT</span><br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-variable">$&#123;NoCache&#125;</span> <span class="hljs-built_in">cp</span> -rfup <span class="hljs-variable">$RAM_LOG</span> -T <span class="hljs-variable">$HDD_LOG</span> 2&gt;&amp;1 | <span class="hljs-variable">$LOG_OUTPUT</span><br>    <span class="hljs-keyword">fi</span><br> <br>    <span class="hljs-built_in">sync</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <p>可以再观察一下&#x2F;var&#x2F;log与&#x2F;var&#x2F;log.hdd，会发现&#x2F;var&#x2F;log.hdd已经不再有后续数据更新，而&#x2F;var&#x2F;log仍旧会自动在75使用率的时候进行日志截断。</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">最后补充，armbian做了一个systemd服务：<span class="hljs-regexp">/lib/</span>systemd<span class="hljs-regexp">/system/</span>armbian-ramlog.service，它开机会创建zram盘，然后从emmc的<span class="hljs-regexp">/var/</span>log.hdd中load数据到zram的<span class="hljs-regexp">/var/</span>log路径下，完成开机初始化。<br></code></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">最后补充，armbian做了一个systemd服务：/lib/systemd/<span class="hljs-built_in">system</span>/armbian-ramlog.service，它开机会创建zram盘，然后从emmc的/<span class="hljs-built_in">var</span>/<span class="hljs-built_in">log</span>.hdd中<span class="hljs-built_in">load</span>数据到zram的/<span class="hljs-built_in">var</span>/<span class="hljs-built_in">log</span>路径下，完成开机初始化。<br></code></pre></td></tr></table></figure>
                 
               </div>
             

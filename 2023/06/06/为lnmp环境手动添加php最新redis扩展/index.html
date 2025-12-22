@@ -27,7 +27,7 @@
 <meta property="og:description" content="手动为lnmp环境增加redis">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-06T16:21:52.000Z">
-<meta property="article:modified_time" content="2025-12-22T23:36:28.444Z">
+<meta property="article:modified_time" content="2025-12-22T23:37:50.450Z">
 <meta property="article:author" content="Sora">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="Linux">
@@ -88,7 +88,7 @@
 
 
   
-<meta name="generator" content="Hexo 6.2.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -308,7 +308,7 @@
 <h3 id="2-下载与解压"><a href="#2-下载与解压" class="headerlink" title="2.下载与解压"></a>2.下载与解压</h3><p><code>sudo wget https://pecl.php.net/get/redis-5.3.4.tgz</code><br><code>sudo tar -zxvf redis-5.3.4.tgz</code></p>
 <h3 id="3-找到phpize文件，用于生成配置"><a href="#3-找到phpize文件，用于生成配置" class="headerlink" title="3.找到phpize文件，用于生成配置"></a>3.找到phpize文件，用于生成配置</h3><p><code>$whereis phpize</code>这里默认安装目录为<code>phpize: /usr/bin/phpize</code></p>
 <h3 id="4-进入刚才解压的redis-5-3-4目录-开始配置"><a href="#4-进入刚才解压的redis-5-3-4目录-开始配置" class="headerlink" title="4.进入刚才解压的redis-5.3.4目录,开始配置"></a>4.进入刚才解压的redis-5.3.4目录,开始配置</h3><p><code>cd redis-5.3.4</code>在其中执行<code>sudo /usr/bin/phpize </code><br>逐行输入</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo .<span class="hljs-regexp">/configure  --with-php-config=/u</span>sr<span class="hljs-regexp">/local/</span>php<span class="hljs-regexp">/bin/</span>php-config<br>sudo make<br>sudo make test<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> ./configure  --with-php-config=/usr/local/php/bin/php-config<br><span class="hljs-built_in">sudo</span> make<br><span class="hljs-built_in">sudo</span> make <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
 <p>这里通常会报错，这里修改配置，lnmp默认安装目录<code>/usr/local/php/etc/php.ini</code><br><code>sudo vi /usr/local/php/etc/php.ini</code><br>找到这一行<br><code>disable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,proc_open,proc_get_status,popen,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,stream_socket_server</code><br>按i开始编辑 用backspace或者del去掉<code>shell_exec,proc_open</code><br>然后在ini中找地方输入<code>extension=redis.so</code>然后<code>ESC-wq!</code>保存<br>之后cd进入redis-5.3.4解压的目录，在目录下执行<code>sudo make install</code>这里没问题的话会成功<br>###5.查看是否安装成功<br><code>php -m</code>会出现php模块信息<br><code>php -m |grep redis</code>出现redis则是成功<br>重启lnmp即可<code>lnmp restart</code></p>
 
                 
