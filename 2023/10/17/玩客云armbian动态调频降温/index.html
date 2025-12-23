@@ -19,15 +19,15 @@
   <meta name="author" content="Sora">
   <meta name="keywords" content="">
   
-    <meta name="description" content="安装apt install cpufrequtils  查看是否支持ondemandcpufreq-infocat &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpu0&#x2F;cpufreq&#x2F;scaling_available_governors  powersave 是无论如何都只会保持最低频率的所谓“省电”模式；   userspace 是自定义频率时的模式，这个是当你设定特定频率时自动转变的">
+    <meta name="description" content="安装apt install cpufrequtils 查看是否支持ondemandcpufreq-infocat &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpu0&#x2F;cpufreq&#x2F;scaling_available_governors powersave 是无论如何都只会保持最低频率的所谓“省电”模式；   userspace 是自定义频率时的模式，这个是当你设定特定频率时自动转变的；">
 <meta property="og:type" content="article">
 <meta property="og:title" content="玩客云armbian动态调频降温">
 <meta property="og:url" content="https://hexo.psorai.eu.org/2023/10/17/%E7%8E%A9%E5%AE%A2%E4%BA%91armbian%E5%8A%A8%E6%80%81%E8%B0%83%E9%A2%91%E9%99%8D%E6%B8%A9/index.html">
 <meta property="og:site_name" content="缘之空">
-<meta property="og:description" content="安装apt install cpufrequtils  查看是否支持ondemandcpufreq-infocat &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpu0&#x2F;cpufreq&#x2F;scaling_available_governors  powersave 是无论如何都只会保持最低频率的所谓“省电”模式；   userspace 是自定义频率时的模式，这个是当你设定特定频率时自动转变的">
+<meta property="og:description" content="安装apt install cpufrequtils 查看是否支持ondemandcpufreq-infocat &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpu0&#x2F;cpufreq&#x2F;scaling_available_governors powersave 是无论如何都只会保持最低频率的所谓“省电”模式；   userspace 是自定义频率时的模式，这个是当你设定特定频率时自动转变的；">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-17T15:12:28.000Z">
-<meta property="article:modified_time" content="2025-12-23T01:19:17.425Z">
+<meta property="article:modified_time" content="2025-12-23T01:19:26.611Z">
 <meta property="article:author" content="Sora">
 <meta property="article:tag" content="Armbian">
 <meta property="article:tag" content="Linux">
@@ -303,10 +303,8 @@
               <div class="markdown-body">
                 
                 <ol>
-<li><p>安装<code>apt install cpufrequtils</code></p>
-</li>
-<li><p>查看是否支持ondemand<br><code>cpufreq-info</code><br><code>cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors</code></p>
-<ol>
+<li>安装<code>apt install cpufrequtils</code></li>
+<li>查看是否支持ondemand<br><code>cpufreq-info</code><br><code>cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors</code><ol>
 <li>powersave 是无论如何都只会保持最低频率的所谓“省电”模式；  </li>
 <li>userspace 是自定义频率时的模式，这个是当你设定特定频率时自动转变的；  </li>
 <li>ondemand 默认模式。一有cpu计算量的任务，就会立即达到最大频率运行，等执行完毕就立即回到最低频率；  </li>
@@ -315,17 +313,16 @@
 <li>schedutil 基于调度程序调整 CPU 频率。</li>
 </ol>
 </li>
-<li><p>如果不是调整为ondemand<br><code>cpufreq-set -g ondemand</code></p>
-</li>
-<li><p>新建cpu-control.sh<br><code>vi /usr/sbin/cpu-control.sh</code></p>
+<li>如果不是调整为ondemand<br><code>cpufreq-set -g ondemand</code></li>
+<li>新建cpu-control.sh<br><code>vi /usr/sbin/cpu-control.sh</code></li>
+</ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/sh  </span><br><span class="hljs-comment">#脚本功能：每过6秒检测一次，当cpu温度低于42℃时，调整cpu频率为400MHz-1540MHz之间；高于46℃时，调整cpu频率为400MHz-800MHz之间。  </span><br><span class="hljs-comment">#引入i、j变量，防止重复执行调频命令。  </span><br>i=1 <span class="hljs-comment">#低温提高主频  </span><br>j=0 <span class="hljs-comment">#高温降低主频  </span><br><span class="hljs-keyword">while</span> <span class="hljs-literal">true</span>  <br><span class="hljs-keyword">do</span>  <br>     <br><span class="hljs-built_in">set</span> -- $(<span class="hljs-built_in">cat</span> /sys/class/thermal/thermal_zone0/temp \  <br>             /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor)  <br>    TEMP=<span class="hljs-variable">$1</span>  <br>    GOVERNOR=<span class="hljs-variable">$2</span>  <br>    <span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$TEMP</span>&quot;</span> -le 42000 ] &amp;&amp; [ <span class="hljs-string">&quot;<span class="hljs-variable">$GOVERNOR</span>&quot;</span> = <span class="hljs-string">&quot;ondemand&quot;</span> ] &amp;&amp; [ <span class="hljs-variable">$i</span> -eq 1 ]; <span class="hljs-keyword">then</span>  <br>        cpufreq-set -d 400MHz -u 1540MHz  <br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;已升频&quot;</span>  <br>        i=0  <br>        j=0  <br>    <span class="hljs-keyword">fi</span>  <br>     <br>    <span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$TEMP</span>&quot;</span> -ge 46000 ] &amp;&amp; [ <span class="hljs-string">&quot;<span class="hljs-variable">$GOVERNOR</span>&quot;</span> = <span class="hljs-string">&quot;ondemand&quot;</span> ] &amp;&amp; [ <span class="hljs-variable">$j</span> -eq 0 ]; <span class="hljs-keyword">then</span>  <br>        cpufreq-set -d 400MHz -u 800MHz  <br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;已降频&quot;</span>  <br>        i=1  <br>        j=1  <br>    <span class="hljs-keyword">fi</span>  <br>     <br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;当前cpu温度：&quot;</span> $((<span class="hljs-variable">$TEMP</span> / <span class="hljs-number">1000</span>))<span class="hljs-string">&quot;℃&quot;</span>  <br>    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span> <span class="hljs-variable">$j</span> <span class="hljs-string">&quot;【提示：1 1处于降频状态；0 0处于升频状态；1 0处于初始状态】&quot;</span>  <br>     <br><span class="hljs-built_in">sleep</span> 6  <br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
 <p>设置权限<br><code>cd /usr/sbin/</code><br><code>sudo chmod -R 755 cpu-control.sh</code></p>
-</li>
-<li><p>设置服务开机自启<br><code>vi /lib/systemd/system/cpu-control.service</code></p>
+<ol start="5">
+<li>设置服务开机自启<br><code>vi /lib/systemd/system/cpu-control.service</code></li>
+</ol>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Unit]</span>  <br><span class="hljs-comment">#服务描述  </span><br><span class="hljs-attr">Description</span>=CPU Governor Control by Temperature  <br>  <br><span class="hljs-section">[Service]</span>  <br><span class="hljs-comment">#执行命令  </span><br><span class="hljs-attr">Type</span>=simple  <br><span class="hljs-attr">ExecStart</span>=/bin/sh /usr/sbin/cpu-control.sh  <br>  <br><span class="hljs-section">[Install]</span>  <br><span class="hljs-attr">WantedBy</span>=multi-user.target<br></code></pre></td></tr></table></figure>
 <p><code>systemctl daemon-reload</code><br><code>systemctl enable cpu-control.service</code><br><code>systemctl start cpu-control.service</code><br><code>systemctl status cpu-control.service</code></p>
-</li>
-</ol>
 <p>参考<br><code>https://www.right.com.cn/forum/thread-6728637-1-1.html</code><br>推荐armbian版本<br><code>https://www.right.com.cn/forum/forum.php?mod=viewthread&amp;tid=4103842</code></p>
 
                 

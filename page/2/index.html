@@ -329,7 +329,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/11/08/%E5%AE%89%E8%A3%85%E5%9C%A8docker%E5%AE%B9%E5%99%A8%E9%87%8C%E7%9A%84%E7%BE%A4%E6%99%96/" target="_self">
         <div>
-          新建macvlan虚拟网络内容根据需要修改，ens33为宿主机真实网卡名称，192.168.10.131为分配给群晖的ip，192.168.10.132为宿主机分配的ip用于和群晖容器连接。 1234567docker network create -d macvlan -o parent=ens33 \--subnet 192.168.10.0/24 \--gateway 192.168.10
+          新建macvlan虚拟网络内容根据需要修改，ens33为宿主机真实网卡名称，192.168.10.131为分配给群晖的ip，192.168.10.132为宿主机分配的ip用于和群晖容器连接。  1234567docker network create -d macvlan -o parent=ens33 \--subnet 192.168.10.0/24 \--gateway 192.168.1
         </div>
       </a>
 
@@ -719,7 +719,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/10/17/%E7%8E%A9%E5%AE%A2%E4%BA%91armbian%E5%8A%A8%E6%80%81%E8%B0%83%E9%A2%91%E9%99%8D%E6%B8%A9/" target="_self">
         <div>
-          安装apt install cpufrequtils  查看是否支持ondemandcpufreq-infocat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors  powersave 是无论如何都只会保持最低频率的所谓“省电”模式；   userspace 是自定义频率时的模式，这个是当你设定特定频率时自动转变的
+          安装apt install cpufrequtils 查看是否支持ondemandcpufreq-infocat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors powersave 是无论如何都只会保持最低频率的所谓“省电”模式；   userspace 是自定义频率时的模式，这个是当你设定特定频率时自动转变的；
         </div>
       </a>
 
