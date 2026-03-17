@@ -864,6 +864,7 @@ sup > a::before,
   -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: no-wrap;
 }
 .toc-list-item.is-active-li::before {
   height: 1rem;
