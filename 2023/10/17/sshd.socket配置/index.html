@@ -27,7 +27,7 @@
 <meta property="og:description" content="一些新版本deiban&#x2F;armbian版本中，关于ssh做出了一些新奇的安全修改，若是不喜欢可以进行如下修改。 问题一、传统方式修改ssh端口无效如果修改&#x2F;etc&#x2F;ssh&#x2F;sshd_config端口无效，可排查是否ssh由socket监听。systemctl status sshdsystemctl edit sshd.socket 1.修改sshd.socket将 [Socket] 部">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-17T15:24:49.000Z">
-<meta property="article:modified_time" content="2026-07-31T07:59:13.522Z">
+<meta property="article:modified_time" content="2026-08-13T05:48:52.450Z">
 <meta property="article:author" content="Sora">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="技术">
@@ -437,7 +437,7 @@
                 <p>一些新版本deiban&#x2F;armbian版本中，关于ssh做出了一些新奇的安全修改，若是不喜欢可以进行如下修改。</p>
 <h4 id="问题一、传统方式修改ssh端口无效"><a href="#问题一、传统方式修改ssh端口无效" class="headerlink" title="问题一、传统方式修改ssh端口无效"></a>问题一、传统方式修改ssh端口无效</h4><p>如果修改<code>/etc/ssh/sshd_config</code>端口无效，可排查是否ssh由socket监听。<br><code>systemctl status sshd</code><br><code>systemctl edit sshd.socket</code></p>
 <h5 id="1-修改sshd-socket"><a href="#1-修改sshd-socket" class="headerlink" title="1.修改sshd.socket"></a>1.修改sshd.socket</h5><p>将 [Socket] 部分和 ListenStream 选项添加到 sshd.socket 文件中，如下所示。第一个 ListenStream 条目用于删除 Clear Linux OS 默认侦听端口值。第二个 ListenStream 条目用于设置新的默认侦听端口值。</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Socket]</span><br><span class="hljs-attr">ListenStream</span>=<br><span class="hljs-attr">ListenStream</span>=<span class="hljs-number">4200</span><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight freedesktop"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs freedesktop"><span class="hljs-section">[Socket]</span><br><span class="hljs-attr">ListenStream</span><span class="hljs-operator">=</span><br><span class="hljs-attr">ListenStream</span><span class="hljs-operator">=</span>4200<br><br></code></pre></td></tr></table></figure>
 <p>务必在 <code>sshd.socket</code> 文件中的最后一行文本之后包含一个新行。</p>
 <h5 id="2-验证修改"><a href="#2-验证修改" class="headerlink" title="2.验证修改"></a>2.验证修改</h5><p><code>cat /etc/systemd/system/sshd.socket.d/override.conf</code></p>
 <h5 id="3-重载并确认"><a href="#3-重载并确认" class="headerlink" title="3.重载并确认"></a>3.重载并确认</h5><p><code>sudo systemctl daemon-reload</code><br><code>sudo systemctl restart sshd.socket</code><br><code>sudo systemctl status sshd.socket</code></p>
